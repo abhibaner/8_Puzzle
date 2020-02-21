@@ -62,7 +62,7 @@ public:
 		}
 	}
 
-	void moveRight(vector<int> p,int ctr) {
+	void moveRight(vector<int> p,int &ctr) {
 		int pos = findIndex();
 		if (pos != 2 && pos != 5 && pos != 8) {
 			vector<int> pcopy = puzzle;
@@ -78,7 +78,7 @@ public:
 
 	}
 
-	void moveLeft(vector<int> p,int ctr) {
+	void moveLeft(vector<int> p,int &ctr) {
 		int pos = findIndex();
 		if (pos != 0 && pos != 3 && pos != 6) {
 			vector<int> pcopy = puzzle;
@@ -88,13 +88,13 @@ public:
 			ctr = ctr + 1;
 			child->id = parent->id + ctr;
 			children.push(child);
-			cout<<ctr<<endl;
+			
 			
 
 		}
 	}
 
-	void moveTop(vector<int> p, int ctr) {
+	void moveTop(vector<int> p, int& ctr) {
 		int pos = findIndex();
 		if (pos != 0 && pos != 1 && pos != 2) {
 			vector<int> pcopy = puzzle;
@@ -108,7 +108,7 @@ public:
 		}
 	}
 
-	void moveDown(vector<int> p, int ctr) {
+	void moveDown(vector<int> p, int &ctr) {
 		int pos = findIndex();
 		if (pos != 6 && pos != 7 && pos != 8) {
 			vector<int> pcopy = puzzle;
