@@ -3,9 +3,7 @@
 #include<vector>
 #include<list>
 #include<queue>
-#include <fstream>
 #include "Source.h"
-#include "Breadth_First_Search.cpp"
 
 using namespace std;
 
@@ -14,6 +12,45 @@ public:
 
 	BFS() {
 
+	}
+	vector<Node*> BreadthFirstSearch(Node* root) {
+		vector<Node*> solutionPath;
+		queue<Node*> openList;
+		queue<Node*> closedList;
+
+		openList.push(root);
+		bool goalFound = false;
+
+		while (!openList.empty()>0 && !goalFound) {
+			Node* current = openList.front();
+			closedList.push(current);
+//			openList.pop_back();
+			openList.pop();
+
+			current->makeMove();
+//			current->printPuzzle();
+
+			for (int i = 0; i < current->children.size(); i++) {
+
+				Node* currentChild = current->children[i];
+//				currentChild->printPuzzle();
+//				cout << endl;
+
+				if (currentChild->solTest()) {
+					
+					cout << "Goal found" << endl;
+					goalFound = true;
+					pathTrace(solutionPath, currentChild);
+
+				}
+
+				if (!contains(openList,currentChild) && !contains(closedList, currentChild)) {
+					openList.push(currentChild);
+				}
+			}
+		}
+
+		return solutionPath;
 	}
 	static bool contains(queue<Node*> lst, Node* c) {
 		bool contains = false;
@@ -41,6 +78,4 @@ public:
 			cout << endl;
 		}
 	}
-
 };
-
