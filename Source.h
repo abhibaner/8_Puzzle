@@ -23,14 +23,7 @@ public:
 
 
 	bool solTest() {
-		/*
-		bool isSol = true;
 
-		for (int i = 0; i < 8; i++) {
-			if (puzzle[i] > puzzle[i + 1])
-				isSol = false;
-		}
-		*/
 		bool isSol = false;
 		vector<int> p{ 1,2,3,4,5,6,7,8,0 };
 		if (puzzle == p) {
@@ -54,5 +47,64 @@ public:
 			}
 			cout << endl;
 		}
+	}
+
+	void moveRight(vector<int> p) {
+		int pos = findIndex();
+		if (pos != 2 && pos != 5 && pos != 8) {
+			vector<int> pcopy = puzzle;
+			
+
+			swap(pcopy[pos], pcopy[pos + 1]);
+			Node *child = new Node(pcopy, this);
+			children.push_back(child);
+
+
+		}
+
+	}
+
+	void moveLeft(vector<int> p) {
+		int pos = findIndex();
+		if (pos != 0 && pos != 3 && pos != 6) {
+			vector<int> pcopy = puzzle;
+
+			swap(pcopy[pos], pcopy[pos - 1]);
+			Node *child = new Node(pcopy,this);
+			children.push_back(child);
+
+		}
+	}
+
+	void moveTop(vector<int> p) {
+		int pos = findIndex();
+		if (pos != 0 && pos != 1 && pos != 2) {
+			vector<int> pcopy = puzzle;
+
+			swap(pcopy[pos], pcopy[pos -3]);
+			Node *child = new Node(pcopy,this);
+			children.push_back(child);
+
+		}
+	}
+
+	void moveDown(vector<int> p) {
+		int pos = findIndex();
+		if (pos != 6 && pos != 7 && pos != 8) {
+			vector<int> pcopy = puzzle;
+
+			swap(pcopy[pos], pcopy[pos + 3]);
+			Node *child = new Node(pcopy,this);
+			children.push_back(child);
+
+		}
+	}
+
+	
+	int findIndex() {
+		vector<int>::iterator it;
+		it = find(puzzle.begin(), puzzle.end(), 0);
+		auto z = std::distance(puzzle.begin(), it);
+		return (int)z;
 	}
 
