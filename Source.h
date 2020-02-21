@@ -1,22 +1,25 @@
 #ifndef INCLUDE_NODE_H_
 #define INCLUDE_NODE_H_
 
+
 #include<iostream>
 #include<algorithm>
 #include<vector>
 #include<list>
 #include<queue>
+#include<unordered_set>
 
 using namespace std;
 
 class Node {
 
 public:
-	vector<Node*> children;
+	queue<Node*> children;
 	Node *parent;
 	vector<int> puzzle;
 	int x = 0;
 	int col = 3;
+	int id;
 
 
 	Node(vector<int> p, Node * prt) {
@@ -26,7 +29,14 @@ public:
 
 
 	bool solTest() {
+		/*
+		bool isSol = true;
 
+		for (int i = 0; i < 8; i++) {
+			if (puzzle[i] > puzzle[i + 1])
+				isSol = false;
+		}
+		*/
 		bool isSol = false;
 		vector<int> p{ 1,2,3,4,5,6,7,8,0 };
 		if (puzzle == p) {
@@ -52,58 +62,66 @@ public:
 		}
 	}
 
-	void moveRight(vector<int> p) {
+	void moveRight(vector<int> p,int ctr) {
 		int pos = findIndex();
 		if (pos != 2 && pos != 5 && pos != 8) {
 			vector<int> pcopy = puzzle;
 			
-
 			swap(pcopy[pos], pcopy[pos + 1]);
 			Node *child = new Node(pcopy, this);
-			children.push_back(child);
-
+			ctr = ctr + 1;
+			child->id = parent->id + ctr;
+			children.push(child);
+			
 
 		}
 
 	}
 
-	void moveLeft(vector<int> p) {
+	void moveLeft(vector<int> p,int ctr) {
 		int pos = findIndex();
 		if (pos != 0 && pos != 3 && pos != 6) {
 			vector<int> pcopy = puzzle;
 
 			swap(pcopy[pos], pcopy[pos - 1]);
 			Node *child = new Node(pcopy,this);
-			children.push_back(child);
+			ctr = ctr + 1;
+			child->id = parent->id + ctr;
+			children.push(child);
+			cout<<ctr<<endl;
+			
 
 		}
 	}
 
-	void moveTop(vector<int> p) {
+	void moveTop(vector<int> p, int ctr) {
 		int pos = findIndex();
 		if (pos != 0 && pos != 1 && pos != 2) {
 			vector<int> pcopy = puzzle;
 
 			swap(pcopy[pos], pcopy[pos -3]);
 			Node *child = new Node(pcopy,this);
-			children.push_back(child);
+			ctr = ctr + 1;
+			child->id = parent->id + ctr;
+			children.push(child);
 
 		}
 	}
 
-	void moveDown(vector<int> p) {
+	void moveDown(vector<int> p, int ctr) {
 		int pos = findIndex();
 		if (pos != 6 && pos != 7 && pos != 8) {
 			vector<int> pcopy = puzzle;
 
 			swap(pcopy[pos], pcopy[pos + 3]);
 			Node *child = new Node(pcopy,this);
-			children.push_back(child);
+			ctr = ctr + 1;
+			child->id = parent->id + ctr;
+			children.push(child);
 
 		}
 	}
 
-	
 	bool equalPuzzle(vector<int> arr) {
 		bool equalPuzzle = true;
 		for (int i = 0; i < 9; i++) {
@@ -141,14 +159,15 @@ public:
 			
 		}
 	*/
-		moveRight(puzzle);
+		int cnter = 0;
+		moveRight(puzzle,cnter);
 //		printInst(puzzle);
 //		cout << endl;
-		moveLeft(puzzle);
+		moveLeft(puzzle,cnter);
 
-		moveDown(puzzle);
+		moveDown(puzzle,cnter);
 
-		moveTop(puzzle);
+		moveTop(puzzle,cnter);
 
 	}
 
