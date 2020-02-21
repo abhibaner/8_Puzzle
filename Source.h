@@ -1,3 +1,6 @@
+#ifndef INCLUDE_NODE_H_
+#define INCLUDE_NODE_H_
+
 #include<iostream>
 #include<algorithm>
 #include<vector>
@@ -101,6 +104,16 @@ public:
 	}
 
 	
+	bool equalPuzzle(vector<int> arr) {
+		bool equalPuzzle = true;
+		for (int i = 0; i < 9; i++) {
+			if (puzzle[i] != arr[i]) {
+				equalPuzzle = false;
+			}
+		}
+		return equalPuzzle;
+	}
+
 	int findIndex() {
 		vector<int>::iterator it;
 		it = find(puzzle.begin(), puzzle.end(), 0);
@@ -108,3 +121,37 @@ public:
 		return (int)z;
 	}
 
+	void printInst(vector<int> arr) {
+		int m = 0;
+		for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < 3; i++) {
+				cout << puzzle[m] << " ";
+				m++;
+			}
+			cout << endl;
+		}
+
+	}
+
+	void makeMove() {
+	/*
+		for (int i = 0; i < 9; i++) {
+			if (puzzle[i] == 0)
+				x = i;
+			
+		}
+	*/
+		moveRight(puzzle);
+//		printInst(puzzle);
+//		cout << endl;
+		moveLeft(puzzle);
+
+		moveDown(puzzle);
+
+		moveTop(puzzle);
+
+	}
+
+};
+
+#endif
