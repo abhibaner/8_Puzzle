@@ -23,4 +23,4 @@ For input, enter the vector row-wise into the main function. For instance, if th
 0 4 5
 8 6 7
 
-Enter vector<int> puzzle{1,2,3,0,4,5,8,6,7}; into the Main.cpp function.
+Enter 1,2,3,0,4,5,8,6,7 sequentially as prompted by the program.
