@@ -1,10 +1,8 @@
 #include<iostream>
 #include<algorithm>
 #include<vector>
-#include<list>
 #include<queue>
 #include <fstream>
-#include<unordered_set>
 #include "Source.h"
 
 using namespace std;
@@ -16,23 +14,30 @@ public:
 
 	}
 
-	void printToFile(queue<Node*> cl) {
+	void printNodes(queue<Node*> expl) {
 		ofstream Nodes;
 		Nodes.open("Nodes.txt");
-		cl.pop();
+		expl.pop();
 		int nodeCount = 1;
-		while (!cl.empty()) {
+		while (!expl.empty()) {
 			int count = 0;
 			Nodes << std::endl;
-			
-			for (auto i : cl.front()->puzzle) {
-
+//			Nodes << "Node number: " << nodeCount;
+			for (auto i : convertColumn(expl.front()->puzzle)) {
+//				if (count % 3 == 0)
+//					Nodes << std::endl;
 				Nodes << i << ' ';
 				count++;
 			}
 			Nodes << std::endl;
-
-			cl.pop();
+//			Nodes << "Parent: ";
+//			for (auto i : cl.front()->parent->puzzle) {
+//				if (count % 3 == 0)
+//					Nodes << std::endl;
+//				Nodes << i << ' ';
+//				count++;
+//			}
+			expl.pop();
 			nodeCount++;
 		}
 		Nodes.close();
@@ -97,7 +102,7 @@ public:
 			}
 			*/
 		}
-		printToFile(closedList);
+		printNodes(closedList);
 		printInfo(closedList);
 
 		return solutionPath;
@@ -117,20 +122,21 @@ public:
 		Nodes.open("nodePath.txt");
 		pth.erase(pth.begin());
 		int nodeCount = 1;
-		while (!pth.empty()) {
-			int count = 0;
+//		while (!pth.empty()) {
+//			int count = 0;
 			Nodes << std::endl;
 			for (auto i : pth) {
-				auto temp = i->puzzle;
+				auto tempr = i->puzzle;
+				auto temp = convertColumn(tempr);
 				for (int j = 0; j < 9; j++) {
 					Nodes << temp[j] << ' ';
-					count++;
+//					count++;
 				}
 				Nodes << std::endl;
-			}
-			Nodes << std::endl;
-			pth.erase(pth.begin());
-			nodeCount++;
+//			}
+//			Nodes << std::endl;
+//			pth.erase(pth.begin());
+//			nodeCount++;
 		}
 		Nodes.close();
 
@@ -170,5 +176,20 @@ public:
 			cout << endl;
 		}
 		printPath(path);
+	}
+
+	vector<int> convertColumn(vector<int> pz) {
+		vector<int> cpz;
+		cpz.push_back(pz[0]);
+		cpz.push_back(pz[3]);
+		cpz.push_back(pz[6]);
+		cpz.push_back(pz[1]);
+		cpz.push_back(pz[4]);
+		cpz.push_back(pz[7]);
+		cpz.push_back(pz[2]);
+		cpz.push_back(pz[5]);
+		cpz.push_back(pz[8]);
+
+		return cpz;
 	}
 };

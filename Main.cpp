@@ -1,10 +1,8 @@
 #include<iostream>
 #include<algorithm>
 #include<vector>
-#include<list>
 #include<queue>
 #include <fstream>
-#include<unordered_set>
 #include "Source.h"
 #include "Breadth_First_Search.cpp"
 
@@ -22,6 +20,7 @@ int main() {
 	BFS bfs;
 
 	vector<Node*> solution = bfs.BreadthFirstSearch(&root);
+
 
 
 

@@ -5,9 +5,8 @@
 #include<iostream>
 #include<algorithm>
 #include<vector>
-#include<list>
 #include<queue>
-#include<unordered_set>
+
 
 using namespace std;
 
@@ -62,7 +61,7 @@ public:
 		}
 	}
 
-	void moveRight(vector<int> p,int &ctr) {
+	void moveRight(vector<int> p,int& ctr) {
 		int pos = findIndex();
 		if (pos != 2 && pos != 5 && pos != 8) {
 			vector<int> pcopy = puzzle;
@@ -78,7 +77,7 @@ public:
 
 	}
 
-	void moveLeft(vector<int> p,int &ctr) {
+	void moveLeft(vector<int> p,int& ctr) {
 		int pos = findIndex();
 		if (pos != 0 && pos != 3 && pos != 6) {
 			vector<int> pcopy = puzzle;
@@ -88,7 +87,6 @@ public:
 			ctr = ctr + 1;
 			child->id = parent->id + ctr;
 			children.push(child);
-			
 			
 
 		}
@@ -108,7 +106,7 @@ public:
 		}
 	}
 
-	void moveDown(vector<int> p, int &ctr) {
+	void moveDown(vector<int> p, int& ctr) {
 		int pos = findIndex();
 		if (pos != 6 && pos != 7 && pos != 8) {
 			vector<int> pcopy = puzzle;
@@ -126,7 +124,7 @@ public:
 		bool equalPuzzle = true;
 		for (int i = 0; i < 9; i++) {
 			if (puzzle[i] != arr[i]) {
-				equalPuzzle = false;
+				equalPuzzle = false;	
 			}
 		}
 		return equalPuzzle;
